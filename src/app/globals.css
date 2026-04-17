@@ -11,10 +11,10 @@
   --color-navy-light: var(--color-primary-light);
   --color-navy-dark: var(--color-primary-dark);
   
-  /* Replaced gold with the gold color used in the school logo */
-  --color-gold: #EAB308;
-  --color-gold-light: #FDE047;
-  --color-gold-dark: #CA8A04;
+  /* Switched secondary global color to blue variation instead of gold */
+  --color-gold: #3B82F6;
+  --color-gold-light: #60A5FA;
+  --color-gold-dark: #2563EB;
   
   --color-cream: #F8FAFC;
   --color-cream-dark: #E8EDF2;
@@ -77,8 +77,8 @@
 }
 
 @keyframes focus-glow {
-  from { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
-  to { box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.12); }
+  from { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  to { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12); }
 }
 
 /* === Base Styles === */
@@ -180,7 +180,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-gold to-gold-dark text-[#020617] font-bold rounded-xl shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] hover:shadow-[0_12px_25px_-6px_rgba(245,158,11,0.6)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 text-sm cursor-pointer border-t border-gold-light/30;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-gold to-gold-dark text-white font-bold rounded-xl shadow-[0_8px_20px_-6px_rgba(59,130,246,0.5)] hover:shadow-[0_12px_25px_-6px_rgba(59,130,246,0.6)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 text-sm cursor-pointer border-t border-gold-light/30;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-md text-white font-semibold rounded-xl border border-white/20 shadow-[0_8px_16px_rgba(0,0,0,0.1)] hover:bg-white/10 hover:border-white/30 hover:shadow-[0_12px_20px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 text-sm cursor-pointer;
