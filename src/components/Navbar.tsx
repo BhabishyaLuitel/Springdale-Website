@@ -85,11 +85,11 @@ export default function Navbar() {
         }`}
       >
         <div
-          className="absolute inset-0 bg-navy/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-[#000000]/60 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 h-full w-72 bg-navy shadow-2xl transition-transform duration-500 ${
+          className={`absolute right-0 top-0 h-full w-72 bg-[#005F48] shadow-2xl transition-transform duration-500 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

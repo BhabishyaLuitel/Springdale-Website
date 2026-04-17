@@ -43,7 +43,7 @@ export default function AcademicsPage() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide uppercase mb-6">
             Academic Programs
           </div>
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-normal pt-2">
             Our <span className="text-gradient">Academics</span>
           </h1>
           <p className="max-w-2xl mx-auto text-white/80 text-lg">

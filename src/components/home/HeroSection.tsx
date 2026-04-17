@@ -64,19 +64,19 @@ export default function HeroSection() {
         {/* Main Heading */}
         <h1
           className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-extrabold text-white mb-4 leading-[1.1] animate-slide-up drop-shadow-lg"
-          style={{ animationDelay: "1.5s" }}
+          style={{ animationDelay: "0.5s" }}
         >
           <span className="text-gradient">Springdale</span>
         </h1>
         <p
           className="text-lg sm:text-xl md:text-2xl text-white/90 font-light mb-3 animate-slide-up drop-shadow-md"
-          style={{ animationDelay: "1.8s" }}
+          style={{ animationDelay: "0.7s" }}
         >
           Secondary School
         </p>
         <p
           className="max-w-[800px] mx-auto text-sm sm:text-base text-white/90 drop-shadow-md leading-[1.6] mb-10 animate-slide-up"
-          style={{ animationDelay: "2.1s", margin: "0 auto" }}
+          style={{ animationDelay: "0.9s", margin: "0 auto" }}
         >
           &ldquo;Education is the Enlightenment of Mind&rdquo; &mdash; Developing
           complete human beings through academics, extra-curricular activities,
@@ -86,7 +86,7 @@ export default function HeroSection() {
         {/* CTA Buttons */}
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up"
-          style={{ animationDelay: "2.4s" }}
+          style={{ animationDelay: "1.1s" }}
         >
           <Link
             href="/admission"

@@ -53,7 +53,7 @@ export default function AdmissionPage() {
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white shadow-lg backdrop-blur-md text-xs font-bold tracking-widest uppercase mb-8">
             Admissions Open 2083
           </div>
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight">
+          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-normal pt-2">
             Apply for <span className="text-gradient">Admission</span>
           </h1>
           <p className="max-w-2xl mx-auto text-white/80 text-lg sm:text-xl leading-relaxed">

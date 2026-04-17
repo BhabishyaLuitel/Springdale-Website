@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://springdale-lovat.vercel.app"),
   title: {
     default: "Shree Springdale Secondary School | Sipadol-8, Bhaktapur",
     template: "%s | Shree Springdale Secondary School",
@@ -50,12 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-body antialiased w-full overflow-x-hidden relative bg-[#F8FAFC]">
-        {/* Global Abstract Background for Glassmorphism */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-gold/15 rounded-full blur-[120px] mix-blend-multiply animate-float" />
-          <div className="absolute top-[30%] right-[-10%] w-[60vw] h-[60vw] bg-primary/10 rounded-full blur-[150px] mix-blend-multiply animate-float" style={{ animationDelay: '2s' }} />
-          <div className="absolute bottom-[-20%] left-[15%] w-[50vw] h-[50vw] bg-gold-500/10 rounded-full blur-[120px] mix-blend-multiply animate-float" style={{ animationDelay: '4s' }} />
-        </div>
+        {/* Global background removed for cleaner aesthetic */}
 
         <Navbar />
         <main className="w-full overflow-hidden relative z-0">{children}</main>
