@@ -11,10 +11,10 @@
   --color-navy-light: var(--color-primary-light);
   --color-navy-dark: var(--color-primary-dark);
   
-  /* Switched secondary global color to blue variation instead of gold */
-  --color-gold: #3B82F6;
-  --color-gold-light: #60A5FA;
-  --color-gold-dark: #2563EB;
+  /* Reverted secondary global color to gold */
+  --color-gold: #EAB308;
+  --color-gold-light: #FDE047;
+  --color-gold-dark: #CA8A04;
   
   --color-cream: #F8FAFC;
   --color-cream-dark: #E8EDF2;

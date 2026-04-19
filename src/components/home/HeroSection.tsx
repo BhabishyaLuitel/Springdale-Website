@@ -1,11 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const video = e.currentTarget;
+    if (video.duration) {
+      if (video.currentTime >= 1.5 && !showOverlay) {
+        setShowOverlay(true);
+      }
+    }
+  };
 
   // Parallax scroll effect
   useEffect(() => {
@@ -38,10 +48,10 @@ export default function HeroSection() {
           loop
           muted
           playsInline
+          onTimeUpdate={handleTimeUpdate}
           className="absolute inset-0 w-full h-full object-cover opacity-80"
-          poster="/images/events/hero-bg-2.jpg"
         >
-          <source src="/videos/hero-drone.mp4" type="video/mp4" />
+          <source src="/videos/hero-drone-fast.mp4" type="video/mp4" />
         </video>
       </div>
 
@@ -53,7 +63,9 @@ export default function HeroSection() {
       <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gold/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "3s" }} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+      {showOverlay && (
+        <>
+          <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
         {/* Badge */}
         <div className="inline-flex items-center justify-center mb-8 animate-fade-in">
           <span className="text-[10px] font-light text-white/70 uppercase tracking-[1px]">
@@ -103,17 +115,19 @@ export default function HeroSection() {
         </div>
 
 
-      </div>
+          </div>
 
-      {/* Bottom gradient fade removed for clarity */}
+          {/* Bottom gradient fade removed for clarity */}
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-shimmer z-20">
-        <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-medium">
-          Scroll
-        </span>
-        <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
-      </div>
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-shimmer z-20">
+            <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-medium">
+              Scroll
+            </span>
+            <ChevronDown className="w-5 h-5 text-white/40 animate-bounce" />
+          </div>
+        </>
+      )}
     </section>
   );
 }

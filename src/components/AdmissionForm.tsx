@@ -297,6 +297,35 @@ export default function AdmissionForm() {
         </div>
       </div>
 
+      {/* ─── Divider ─── */}
+      <div className="border-t border-cream-dark" />
+
+      {/* ─── Section 6: Documents ─── */}
+      <div>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold-dark font-bold text-sm border border-gold/20">6</div>
+          <h3 className="font-heading text-lg font-bold text-body">Required Documents</h3>
+        </div>
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label htmlFor="documents" className="form-label">
+              Upload Documents
+            </label>
+            <input 
+              type="file" 
+              id="documents" 
+              name="documents" 
+              multiple 
+              accept=".pdf,.png,.jpg,.jpeg" 
+              className="block w-full text-sm text-body-muted file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gold/10 file:text-gold-dark hover:file:bg-gold/20 file:cursor-pointer transition-all border border-cream-dark rounded-xl px-0 py-0 focus:outline-none focus:ring-2 focus:ring-gold/30 bg-white" 
+            />
+            <p className="text-xs text-body-muted leading-relaxed mt-2 pl-1">
+              Please upload clear copies of the student's Birth Certificate and previous academic marksheet. You can select multiple files. (Max 5MB per file)
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* ─── Terms & Submit ─── */}
       <div className="space-y-6 pt-2">
         <div className="bg-cream rounded-xl p-5 border border-cream-dark">
