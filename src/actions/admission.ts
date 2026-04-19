@@ -189,7 +189,7 @@ export async function submitAdmissionForm(prevState: any, formData: FormData) {
 
     const mailOptions = {
       from: `"${data.guardianName}" <${process.env.SMTP_EMAIL}>`,
-      to: process.env.RECEIVER_EMAIL,
+      to: process.env.RECEIVER_EMAIL || "springdale.edu.np@gmail.com",
       replyTo: data.guardianEmail || process.env.SMTP_EMAIL,
       subject: `New Admission Application: ${data.studentName} (${data.grade})`,
       html: `
