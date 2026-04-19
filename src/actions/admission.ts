@@ -211,7 +211,6 @@ export async function submitAdmissionForm(prevState: any, formData: FormData) {
     return { success: true };
   } catch (error: any) {
     console.error("Error sending admission email:", error);
-    require("fs").writeFileSync("crash.log", String(error.stack || error));
-    return { error: "Failed to submit application. Reason: " + String(error.message || error) };
+    return { error: "Missing Environment Variables or SMTP failed. Please ensure SMTP_EMAIL and SMTP_PASSWORD are set in your Vercel Dashboard Settings! Reason: " + String(error.message || error) };
   }
 }
