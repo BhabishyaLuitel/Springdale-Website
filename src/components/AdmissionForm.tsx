@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Send, CheckCircle, Loader2, GraduationCap, Info } from "lucide-react";
+import { submitAdmissionForm } from "@/actions/admission";
 
 const levels = [
   { value: "pre-primary", label: "Pre-Primary" },
@@ -28,13 +29,22 @@ export default function AdmissionForm() {
     return selectedLevel ? gradesByLevel[selectedLevel] || [] : [];
   }, [selectedLevel]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const result = await submitAdmissionForm(null, formData);
+
+    setLoading(false);
+    if (result.error) {
+      setError(result.error);
+    } else {
       setSubmitted(true);
-    }, 2000);
+    }
   };
 
   if (submitted) {
@@ -68,6 +78,11 @@ export default function AdmissionForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-10">
+      {error && (
+        <div className="p-4 bg-crimson/10 border border-crimson/20 text-crimson rounded-xl text-sm animate-fade-in font-medium">
+          {error}
+        </div>
+      )}
       {/* ─── Section 1: Student Information ─── */}
       <div>
         <div className="flex items-center gap-3 mb-6">
@@ -79,19 +94,19 @@ export default function AdmissionForm() {
             <label htmlFor="studentName" className="form-label">
               Student&apos;s Full Name <span className="text-crimson">*</span>
             </label>
-            <input type="text" id="studentName" required className="form-input" placeholder="e.g. Ram Bahadur Shrestha" />
+            <input type="text" id="studentName" name="studentName" required className="form-input" placeholder="e.g. Ram Bahadur Shrestha" />
           </div>
           <div className="space-y-2">
             <label htmlFor="dob" className="form-label">
               Date of Birth <span className="text-crimson">*</span>
             </label>
-            <input type="date" id="dob" required className="form-input" />
+            <input type="date" id="dob" name="dob" required className="form-input" />
           </div>
           <div className="space-y-2">
             <label htmlFor="gender" className="form-label">
               Gender <span className="text-crimson">*</span>
             </label>
-            <select id="gender" required className="form-select">
+            <select id="gender" name="gender" required className="form-select">
               <option value="">Select gender</option>
               {genderOptions.map((g) => (
                 <option key={g} value={g.toLowerCase()}>{g}</option>
@@ -102,7 +117,7 @@ export default function AdmissionForm() {
             <label htmlFor="address" className="form-label">
               Home Address <span className="text-crimson">*</span>
             </label>
-            <input type="text" id="address" required className="form-input" placeholder="e.g. Bhaktapur-5, Nepal" />
+            <input type="text" id="address" name="address" required className="form-input" placeholder="e.g. Bhaktapur-5, Nepal" />
           </div>
         </div>
       </div>
@@ -123,6 +138,7 @@ export default function AdmissionForm() {
             </label>
             <select
               id="level"
+              name="level"
               required
               className="form-select"
               value={selectedLevel}
@@ -140,6 +156,7 @@ export default function AdmissionForm() {
             </label>
             <select
               id="grade"
+              name="grade"
               required
               className={`form-select ${!selectedLevel ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={!selectedLevel}
@@ -187,13 +204,13 @@ export default function AdmissionForm() {
             <label htmlFor="prevSchool" className="form-label">
               Previous School Name
             </label>
-            <input type="text" id="prevSchool" className="form-input" placeholder="Name of previous school (if any)" />
+            <input type="text" id="prevSchool" name="prevSchool" className="form-input" placeholder="Name of previous school (if any)" />
           </div>
           <div className="space-y-2">
             <label htmlFor="lastGrade" className="form-label">
               Last Grade Completed
             </label>
-            <input type="text" id="lastGrade" className="form-input" placeholder="e.g. Grade 3" />
+            <input type="text" id="lastGrade" name="lastGrade" className="form-input" placeholder="e.g. Grade 3" />
           </div>
         </div>
       </div>
@@ -212,13 +229,13 @@ export default function AdmissionForm() {
             <label htmlFor="guardianName" className="form-label">
               Guardian&apos;s Full Name <span className="text-crimson">*</span>
             </label>
-            <input type="text" id="guardianName" required className="form-input" placeholder="Parent or guardian name" />
+            <input type="text" id="guardianName" name="guardianName" required className="form-input" placeholder="Parent or guardian name" />
           </div>
           <div className="space-y-2">
             <label htmlFor="relationship" className="form-label">
               Relationship <span className="text-crimson">*</span>
             </label>
-            <select id="relationship" required className="form-select">
+            <select id="relationship" name="relationship" required className="form-select">
               <option value="">Select relationship</option>
               <option value="father">Father</option>
               <option value="mother">Mother</option>
@@ -230,13 +247,13 @@ export default function AdmissionForm() {
             <label htmlFor="guardianPhone" className="form-label">
               Phone Number <span className="text-crimson">*</span>
             </label>
-            <input type="tel" id="guardianPhone" required className="form-input" placeholder="+977 98..." />
+            <input type="tel" id="guardianPhone" name="guardianPhone" required className="form-input" placeholder="+977 98..." />
           </div>
           <div className="space-y-2">
             <label htmlFor="guardianEmail" className="form-label">
               Email Address
             </label>
-            <input type="email" id="guardianEmail" className="form-input" placeholder="email@example.com" />
+            <input type="email" id="guardianEmail" name="guardianEmail" className="form-input" placeholder="email@example.com" />
           </div>
         </div>
       </div>
@@ -257,6 +274,7 @@ export default function AdmissionForm() {
             </label>
             <textarea
               id="medical"
+              name="medical"
               rows={3}
               className="form-input resize-none leading-relaxed"
               placeholder="Any known allergies, medical conditions, or special needs (optional)"
@@ -266,7 +284,7 @@ export default function AdmissionForm() {
             <label htmlFor="referral" className="form-label">
               How did you hear about us?
             </label>
-            <select id="referral" className="form-select">
+            <select id="referral" name="referral" className="form-select">
               <option value="">Select an option</option>
               <option value="friends">Friends / Family</option>
               <option value="social-media">Social Media</option>

@@ -2,18 +2,28 @@
 
 import { useState } from "react";
 import { Send, CheckCircle, Loader2, Info } from "lucide-react";
+import { submitContactForm } from "@/actions/contact";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError(null);
+    
+    const formData = new FormData(e.currentTarget);
+    const result = await submitContactForm(null, formData);
+
+    setLoading(false);
+    if (result.error) {
+      setError(result.error);
+    } else {
       setSubmitted(true);
-    }, 1500);
+    }
   };
 
   if (submitted) {
@@ -42,6 +52,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-3 bg-crimson/10 border border-crimson/20 text-crimson rounded-xl text-sm animate-fade-in">
+          {error}
+        </div>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label htmlFor="name" className="form-label">
@@ -50,6 +65,7 @@ export default function ContactForm() {
           <input
             type="text"
             id="name"
+            name="name"
             required
             className="form-input"
             placeholder="John Doe"
@@ -62,6 +78,7 @@ export default function ContactForm() {
           <input
             type="email"
             id="email"
+            name="email"
             required
             className="form-input"
             placeholder="john@example.com"
@@ -76,6 +93,7 @@ export default function ContactForm() {
           <input
             type="tel"
             id="phone"
+            name="phone"
             className="form-input"
             placeholder="+977 98..."
           />
@@ -86,6 +104,7 @@ export default function ContactForm() {
           </label>
           <select
             id="subject"
+            name="subject"
             required
             className="form-select"
           >
@@ -104,6 +123,7 @@ export default function ContactForm() {
         </label>
         <textarea
           id="message"
+          name="message"
           rows={5}
           required
           className="form-input resize-none leading-relaxed"
