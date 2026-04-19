@@ -36,14 +36,19 @@ export default function AdmissionForm() {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    const result = await submitAdmissionForm(null, formData);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const result = await submitAdmissionForm(null, formData);
 
-    setLoading(false);
-    if (result.error) {
-      setError(result.error);
-    } else {
-      setSubmitted(true);
+      if (result.error) {
+        setError(result.error);
+      } else {
+        setSubmitted(true);
+      }
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred or the file is too large. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
